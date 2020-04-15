@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>深拷贝</title>
+</head>
+<body>
+	
+</body>
+<script>
+		// 深拷贝
+	// 1、JSON.parse(JSON.stringify())
+    
+    let arr = [1, 2, {
+	name: '山东'
+   }];
+    let arr3 = JSON.parse(JSON.stringify(arr))
+	arr3[1] = 6;
+	arr3[2].name = '山西';
+	console.log(arr,arr3);
+	//原理：首先用JSON.stringify()将对象转化成JSON字符串，再用JSON。parse()将字符串解析成对象。这样新的对象就会产生。而且对象会开辟新的栈。实现了深拷贝。
+	// 注意：这种方法虽然可以实现数组或者对象的深拷贝，但是不能处理函数
+     let arr = [1, 2, {
+	name: '山东'
+   },function add() {
+   }];
+    let arr3 = JSON.parse(JSON.stringify(arr))
+	arr3[1] = 6;
+	arr3[2].name = '山西';
+	console.log(arr,arr3);
+	// 因为JSON.stringify()方法是将一个对象或者数组转化成一个JSON字符串，不能接收函数
+</script>
+</html>
