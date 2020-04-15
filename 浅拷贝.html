@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>浅拷贝</title>
+</head>
+<body>
+	
+</body>
+<script>
+	// 浅拷贝的实现方式
+	 // 1、直接复制一个变量
+	 let obj1 = {name:'山东',id:1,city:{name:'青岛',cityId:'2'}};
+	 let obj2 = obj1;
+	 obj2.city.name = '济南'; // 修改复制的对象会影响原对象
+	 obj2.city.cityId = 3;
+	 console.log(obj1, obj2);
+
+	 // 2、Object.assign: 方法用于将所有可枚举属性的值从一个或多个源对象复制到目标对象。它将返回目标对象。
+	 let obj1 = {name:'山东',id:1,city:{name:'青岛',cityId:'2'}};
+	 let obj2 = Object.assign(obj1);
+	 obj2.city.name = '济南'; 
+	 obj2.city.cityId = 3;
+	 console.log(obj1);
+
+	 let obj1 = {name:'山东',id:1};
+	 let obj2 = {name:'青岛',id:2};
+	 let obj3 = Object.assign(obj1,obj2);
+	 console.log(obj1,obj3);
+
+	 let obj3 = {
+	 	name: '山东'
+	 };
+	 let obj4 = Object.assign(obj3);
+	 obj4.name = '山西';
+	console.log(obj3);//{ name: '山西'}
+
+	const obj5 = { a: 1 };
+	const obj6 = { b: 1 };
+	const copy = Object.assign(obj6, obj5);
+    console.log(copy); // { b:1,a: 1 }
+
+    const a = '山东';
+    const b = true;
+    const c = 10;
+    const obj = Object.assign({}, a, b, c);
+    console.log(obj); // { "0": "山", "1": "东" }
+
+    const ccc = Object.assign({b: 'c'},{ [Symbol('d')]: 'e' }) 
+    console.log(ccc)
+
+    // 3、Array.prototype.concat()  修改新对象会改到原对象
+    let arr = [1, 2, {
+    	name: '山东'
+    }];
+    let arr2 = arr.concat();
+    arr[0] = 8;
+    arr2[1] = '这是和arr1的区别'; 
+    arr2[2].name = '山西';
+    console.log(arr,arr2);
+    var arr1 = ["1","2","3"];
+    var arr2 = arr1.concat();
+    arr2[1] = "9";
+    console.log(arr1,arr2);
+
+	// 4、Array.prototype.slice() 修改新对象会改到原对象
+	let arr = [1, 2, {
+		name: ' 山东'
+	}];
+	let arr3 = arr.slice();
+	arr[0] = 8;
+	arr3[1] = '这是和arr的区别'; 
+	arr3[2].name = '山南'
+	console.log(arr,arr3);
+
+// 	补充
+// 	关于Array的slice和concat方法的补充说明：Array的slice和concat方法不修改原数组，只会返回一个浅复制了原数组中的元素的一个新数组。
+
+// 如果该元素是个对象引用(不是实际的对象)，slice 会拷贝这个对象引用到新的数组里。两个对象引用都引用了同一个对象。如果被引用的对象发生改变，则新的和原来的数组中的这个元素也会发生改变
+// 对于字符串、数字及布尔值来说（不是 String、Number 或者 Boolean 对象），slice 会拷贝这些值到新的数组里。在别的数组里修改这些字符串或数字或是布尔值，将不会影响另一个数组
+
+let arr = [1, 2, {
+	name: ' 山东'
+}];
+let arr3 = arr.slice();
+	// arr3[1] = 6;
+	// arr3[1] = 'hello'
+	arr3[1] = true
+	console.log(arr,arr3);
+
+	
+</script>
+</html>
